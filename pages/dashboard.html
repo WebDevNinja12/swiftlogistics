@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Bookings – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shipping-fast"></i> Swift<span>Logistics</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li id="userMenu">
+          <span class="user-greeting"></span>
+          <a href="dashboard.html" class="btn btn-outline">My Bookings</a>
+          <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <section class="dashboard">
+    <div class="container">
+      <div class="dashboard-header">
+        <h2>My Bookings</h2>
+        <a href="services.html" class="btn btn-primary">New Booking</a>
+      </div>
+      <div id="stats" class="stats-grid"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Type</th><th>Details</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="bookingsTable"></tbody>
+        </table>
+      </div>
+      <p id="emptyMsg" style="text-align:center;margin-top:2rem;display:none;color:var(--gray-600);">No bookings yet. <a href="services.html">Book a service</a></p>
+    </div>
+  </section>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    const session = requireAuth();
+    if (!session) throw new Error('redirect');
+    function detailSummary(b) {
+      const d = b.details || b;
+      switch (b.type) {
+        case 'flight': return `${d.from || ''} → ${d.to || ''} (${d.passengers || '?'} pax)`;
+        case 'ride': return `${d.pickup || ''} → ${d.dropoff || ''}`;
+        case 'car': return `${d.city || ''} – ${d.category || ''}`;
+        case 'shipment': return `${d.origin || ''} → ${d.destination || ''} (${d.mode || ''})`;
+        default: return '-';
+      }
+    }
+    async function loadBookings() {
+      try { const data = await Api.myBookings(); return data.bookings || []; }
+      catch { return getUserBookings(session.id); }
+    }
+    async function render() {
+      const bookings = await loadBookings();
+      const tbody = document.getElementById('bookingsTable');
+      const empty = document.getElementById('emptyMsg');
+      if (!bookings.length) { tbody.innerHTML = ''; empty.style.display = 'block'; }
+      else {
+        empty.style.display = 'none';
+        tbody.innerHTML = bookings.map(b => `<tr>
+          <td>${(b.id||'').toString().slice(-8)}</td><td>${b.type}</td><td>${detailSummary(b)}</td>
+          <td>${formatCurrency(b.amount)}</td><td>${statusBadge(b.status)}</td>
+          <td>${formatDate(b.created_at || b.createdAt)}</td>
+          <td>${b.status === 'pending_payment' ? `<button class="btn btn-sm btn-primary" onclick="payNow('${b.id}', ${b.amount})">Pay</button>` : '-'}</td>
+        </tr>`).join('');
+      }
+      const stats = { total: bookings.length, pending: bookings.filter(b=>b.status==='pending_payment').length, paid: bookings.filter(b=>b.status==='paid').length, approved: bookings.filter(b=>b.status==='approved').length };
+      document.getElementById('stats').innerHTML = `<div class="stat-card"><div class="number">${stats.total}</div><div class="label">Total</div></div><div class="stat-card"><div class="number">${stats.pending}</div><div class="label">Awaiting Payment</div></div><div class="stat-card"><div class="number">${stats.paid}</div><div class="label">Awaiting Approval</div></div><div class="stat-card"><div class="number">${stats.approved}</div><div class="label">Approved</div></div>`;
+    }
+    window.payNow = (id, amount) => showPaymentModal(id, amount, () => { alert('Payment successful! Awaiting admin approval.'); render(); });
+    render();
+  </script>
+</body>
+</html>
