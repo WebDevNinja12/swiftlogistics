@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <h2><i class="fas fa-shipping-fast"></i> Admin</h2>
+      <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="#" onclick="filterStatus('all');return false;"><i class="fas fa-list"></i> All Bookings</a>
+      <a href="#" onclick="filterStatus('paid');return false;"><i class="fas fa-clock"></i> Awaiting Approval</a>
+      <a href="#" onclick="filterStatus('approved');return false;"><i class="fas fa-check"></i> Approved</a>
+      <a href="../index.html" style="margin-top:2rem;"><i class="fas fa-home"></i> View Website</a>
+      <a href="#" onclick="logoutAdmin();return false;" style="color:#f87171;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </aside>
+    <main class="admin-main">
+      <div class="dashboard-header">
+        <h2>Admin Dashboard</h2>
+        <span id="adminName"></span>
+      </div>
+      <div id="stats" class="stats-grid"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer</th>
+              <th>Type</th>
+              <th>Details</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsTable"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    const admin = requireAdmin();
+    document.getElementById('adminName').textContent = admin.name;
+    let currentFilter = 'all';
+    function detailSummary(b) {
+      const d = b.details || b;
+      switch (b.type) {
+        case 'flight': return `${d.from || ''} → ${d.to || ''}`;
+        case 'ride': return `${d.pickup || ''} → ${d.dropoff || ''}`;
+        case 'car': return `${d.city || ''} (${d.category || ''})`;
+        case 'shipment': return `${d.origin || ''} → ${d.destination || ''} (${d.mode || ''})`;
+        default: return '-';
+      }
+    }
+    async function loadBookings() {
+      try {
+        const data = await Api.adminBookings(currentFilter);
+        return data.bookings || [];
+      } catch {
+        let bookings = getBookings();
+        if (currentFilter !== 'all') bookings = bookings.filter(b => b.status === currentFilter);
+        return bookings.map(b => ({...b, user_name: b.userName, user_email: b.userEmail, created_at: b.createdAt}));
+      }
+    }
+    async function render() {
+      const bookings = await loadBookings();
+      const tbody = document.getElementById('bookingsTable');
+      tbody.innerHTML = bookings.map(b => `
+        <tr>
+          <td>${(b.id || '').toString().slice(-8)}</td>
+          <td>${b.user_name || b.userName || '-'}<br><small>${b.user_email || b.userEmail || ''}</small></td>
+          <td>${b.type}</td>
+          <td>${detailSummary(b)}</td>
+          <td>${formatCurrency(b.amount)}</td>
+          <td>${statusBadge(b.status)}</td>
+          <td>${formatDate(b.created_at || b.createdAt)}</td>
+          <td>${b.status === 'paid' ? `<button class="btn btn-sm btn-success" onclick="approve('${b.id}')">Approve</button> <button class="btn btn-sm btn-danger" onclick="reject('${b.id}')">Reject</button>` : '-'}</td>
+        </tr>`).join('') || '<tr><td colspan="8" style="text-align:center;">No bookings</td></tr>';
+      try {
+        const s = await Api.adminStats();
+        document.getElementById('stats').innerHTML = `<div class="stat-card"><div class="number">${s.total}</div><div class="label">Total Bookings</div></div><div class="stat-card"><div class="number">${s.pending}</div><div class="label">Pending Payment</div></div><div class="stat-card"><div class="number">${s.paid}</div><div class="label">Awaiting Approval</div></div><div class="stat-card"><div class="number">${s.approved}</div><div class="label">Approved</div></div>`;
+      } catch {
+        const all = getBookings();
+        document.getElementById('stats').innerHTML = `<div class="stat-card"><div class="number">${all.length}</div><div class="label">Total Bookings</div></div><div class="stat-card"><div class="number">${all.filter(b=>b.status==='pending_payment').length}</div><div class="label">Pending Payment</div></div><div class="stat-card"><div class="number">${all.filter(b=>b.status==='paid').length}</div><div class="label">Awaiting Approval</div></div><div class="stat-card"><div class="number">${all.filter(b=>b.status==='approved').length}</div><div class="label">Approved</div></div>`;
+      }
+    }
+    window.filterStatus = (s) => { currentFilter = s; render(); };
+    window.approve = async (id) => { if (!confirm('Approve this booking?')) return; try { await Api.approveBooking(id); } catch { updateBookingStatus(id, 'approved', { approvedAt: new Date().toISOString() }); } render(); };
+    window.reject = async (id) => { if (!confirm('Reject this booking?')) return; try { await Api.rejectBooking(id); } catch { updateBookingStatus(id, 'rejected'); } render(); };
+    render();
+  </script>
+</body>
+</html>

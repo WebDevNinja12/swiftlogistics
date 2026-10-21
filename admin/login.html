@@ -22,27 +22,30 @@
           <label>Password</label>
           <input type="password" name="password" required value="Admin@123" />
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Login as Admin</button>
+        <button type="submit" class="btn btn-primary" style="width:100%;" id="adminBtn">Login as Admin</button>
       </form>
-      <p class="form-footer" style="font-size:0.85rem;color:#6b7280;">
-        Demo credentials are pre-filled. Customer login is on the main site.
-      </p>
+      <p class="form-footer" style="font-size:0.85rem;color:#6b7280;">Demo credentials pre-filled. Customer login is on the main site.</p>
       <p class="form-footer"><a href="../index.html">← Back to website</a></p>
     </div>
   </section>
+  <script src="../js/api.js"></script>
   <script src="../js/auth.js"></script>
   <script>
     if (getAdminSession()) window.location.href = 'dashboard.html';
-    document.getElementById('adminLoginForm').addEventListener('submit', e => {
+    document.getElementById('adminLoginForm').addEventListener('submit', async e => {
       e.preventDefault();
+      const btn = document.getElementById('adminBtn');
+      const err = document.getElementById('errorMsg');
+      err.style.display = 'none';
+      btn.disabled = true;
       const fd = new FormData(e.target);
-      const result = loginAdmin(fd.get('email'), fd.get('password'));
-      if (result.ok) {
+      try {
+        await Api.adminLogin(fd.get('email'), fd.get('password'));
         window.location.href = 'dashboard.html';
-      } else {
-        const err = document.getElementById('errorMsg');
-        err.textContent = result.error;
-        err.style.display = 'block';
+      } catch (apiErr) {
+        const result = loginAdmin(fd.get('email'), fd.get('password'));
+        if (result.ok) window.location.href = 'dashboard.html';
+        else { err.textContent = apiErr.message || result.error; err.style.display = 'block'; btn.disabled = false; }
       }
     });
   </script>
