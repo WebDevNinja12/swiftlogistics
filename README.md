@@ -1,31 +1,49 @@
-# SwiftLogistics Website
+# SwiftLogistics
 
-A complete logistics platform demo with:
+Full logistics platform: book flights, rides, car rentals and goods shipment.
 
-- **Customer registration & login**
-- **Separate Admin login** (`admin@swiftlogistics.com` / `Admin@123`)
-- Book **Flights**, **Rides**, **Car Rentals**, **Goods Shipment** (road/air/sea)
-- Booking only available when logged in
+## Features
+- Customer registration & login
+- **Separate admin login** (`admin@swiftlogistics.com` / `Admin@123`)
+- Book flights, rides, car rentals, goods shipment (road / air / sea)
+- Booking only when logged in
 - Payment required before admin approval
 - Pages: Home, About, Services, Contact, Customer Dashboard, Admin Dashboard
 
-## Tech
+## Structure
 
-Pure HTML + CSS + Vanilla JS. Data stored in browser `localStorage` (demo only).
-
-## Run locally
-
-Just open `index.html` in a browser, or serve with any static server:
-
-```bash
-npx serve .
+```
+├── index.html, pages/, admin/, css/, js/   # Frontend (static)
+├── backend/                               # Real API (Express + SQLite + JWT)
+│   ├── server.js
+│   ├── package.json
+│   └── README.md
+└── README.md
 ```
 
-## Deploy
+## Frontend (demo mode)
+Open `index.html` or deploy the static files. Data lives in `localStorage`.
 
-This project is ready for Vercel / Netlify / GitHub Pages as a static site.
+## Backend (real database + auth)
 
-## Default Admin
+```bash
+cd backend
+npm install
+npm start
+```
 
-- Email: `admin@swiftlogistics.com`
-- Password: `Admin@123`
+API: `http://localhost:4000`
+
+- Customer JWT and Admin JWT use **separate secrets**
+- SQLite file database (`backend/data/swiftlogistics.db`)
+- Password hashing with bcrypt
+- Booking flow: `pending_payment` → `paid` → `approved` / `rejected`
+
+See `backend/README.md` for all endpoints.
+
+## Live demo
+Vercel (static frontend): https://swiftlogistics-web-dev-ninja-12-s-projects.vercel.app
+
+## Default admin
+- Email: admin@swiftlogistics.com
+- Password: Admin@123
