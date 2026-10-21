@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Login – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shipping-fast"></i> Swift<span>Logistics</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="authLinks">
+          <a href="login.html" class="btn btn-outline">Login</a>
+          <a href="register.html" class="btn btn-primary">Register</a>
+        </li>
+        <li id="userMenu" style="display:none;">
+          <span class="user-greeting"></span>
+          <a href="dashboard.html" class="btn btn-outline">My Bookings</a>
+          <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <section class="form-section bg-light">
+    <div class="form-card">
+      <h2>Customer Login</h2>
+      <p class="subtitle">Access your bookings and account</p>
+      <div id="errorMsg" class="form-error" style="display:none;text-align:center;margin-bottom:1rem;"></div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;" id="loginBtn">Login</button>
+      </form>
+      <p class="form-footer">Don't have an account? <a href="register.html">Register here</a></p>
+      <p class="form-footer" style="margin-top:0.5rem;font-size:0.85rem;">Admin? <a href="../admin/login.html">Go to Admin Login</a></p>
+    </div>
+  </section>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    if (getSession()) window.location.href = 'dashboard.html';
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const err = document.getElementById('errorMsg');
+      err.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Logging in...';
+      const fd = new FormData(e.target);
+      const email = fd.get('email');
+      const password = fd.get('password');
+      try {
+        await Api.login(email, password);
+        window.location.href = 'dashboard.html';
+      } catch (apiErr) {
+        const result = loginUser(email, password);
+        if (result.ok) window.location.href = 'dashboard.html';
+        else {
+          err.textContent = apiErr.message || result.error || 'Login failed';
+          err.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Login';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
