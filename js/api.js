@@ -1,8 +1,8 @@
 /**
  * API client for SwiftLogistics backend
- * Set window.API_BASE to your backend URL (default http://localhost:4000)
+ * Default: live Vercel API
  */
-const API_BASE = (typeof window !== 'undefined' && window.API_BASE) || 'http://localhost:4000';
+const API_BASE = (typeof window !== 'undefined' && window.API_BASE) || 'https://swiftlogistics-api-web-dev-ninja-12-s-projects.vercel.app';
 
 function getToken() {
   return localStorage.getItem('sl_token');
@@ -60,11 +60,7 @@ const Api = {
     localStorage.removeItem('sl_admin_session');
   },
   async createBooking({ type, details, amount }) {
-    return api('/api/bookings', {
-      method: 'POST',
-      token: getToken(),
-      body: { type, details, amount },
-    });
+    return api('/api/bookings', { method: 'POST', token: getToken(), body: { type, details, amount } });
   },
   async myBookings() {
     return api('/api/bookings/mine', { token: getToken() });
