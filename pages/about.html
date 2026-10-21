@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shipping-fast"></i> Swift<span>Logistics</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html" class="active">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="authLinks">
+          <a href="login.html" class="btn btn-outline">Login</a>
+          <a href="register.html" class="btn btn-primary">Register</a>
+        </li>
+        <li id="userMenu" style="display:none;">
+          <span class="user-greeting"></span>
+          <a href="dashboard.html" class="btn btn-outline">My Bookings</a>
+          <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>About SwiftLogistics</h2>
+        <p>Moving people and goods with speed, safety and simplicity</p>
+      </div>
+      <div style="max-width:800px;margin:0 auto;">
+        <p style="margin-bottom:1.5rem;font-size:1.1rem;">SwiftLogistics is a modern logistics platform built to simplify how individuals and businesses move around and ship cargo. From flight tickets and city rides to car rentals and multi-modal freight, we bring every transport option under one secure account.</p>
+        <p style="margin-bottom:1.5rem;">Founded with a focus on reliability and transparency, we require every booking to be paid before it is reviewed and approved by our operations team. This ensures both customers and service partners are protected.</p>
+        <h3 style="margin:2rem 0 1rem;color:var(--primary);">Our Mission</h3>
+        <p>To make global mobility and logistics accessible, transparent and trustworthy for everyone.</p>
+        <h3 style="margin:2rem 0 1rem;color:var(--primary);">Core Values</h3>
+        <ul style="list-style:disc;padding-left:1.5rem;">
+          <li>Customer-first service</li>
+          <li>Secure payments & verified bookings</li>
+          <li>Transparent pricing</li>
+          <li>Continuous operational excellence</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h3><i class="fas fa-shipping-fast"></i> SwiftLogistics</h3><p>Your trusted partner for flights, rides, car rentals and worldwide shipping.</p></div>
+      <div><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Account</h4><ul><li><a href="login.html">Customer Login</a></li><li><a href="register.html">Register</a></li><li><a href="../admin/login.html">Admin Login</a></li></ul></div>
+      <div><h4>Contact</h4><p><i class="fas fa-envelope"></i> support@swiftlogistics.com</p><p><i class="fas fa-phone"></i> +234 800 123 4567</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 SwiftLogistics. All rights reserved.</p></div>
+  </footer>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

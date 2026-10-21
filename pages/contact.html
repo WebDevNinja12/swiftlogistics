@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shipping-fast"></i> Swift<span>Logistics</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li id="authLinks">
+          <a href="login.html" class="btn btn-outline">Login</a>
+          <a href="register.html" class="btn btn-primary">Register</a>
+        </li>
+        <li id="userMenu" style="display:none;">
+          <span class="user-greeting"></span>
+          <a href="dashboard.html" class="btn btn-outline">My Bookings</a>
+          <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <section class="form-section">
+    <div class="container">
+      <div class="form-card" style="max-width:560px;">
+        <h2>Contact Us</h2>
+        <p class="subtitle">We usually reply within a few hours</p>
+        <form id="contactForm">
+          <div class="form-group"><label>Full Name</label><input type="text" name="name" required /></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" required /></div>
+          <div class="form-group"><label>Subject</label><input type="text" name="subject" required /></div>
+          <div class="form-group"><label>Message</label><textarea name="message" required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+        </form>
+        <div id="contactSuccess" class="form-success" style="display:none;margin-top:1rem;">Thank you! Your message has been received.</div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;color:var(--gray-600);">
+        <p><i class="fas fa-envelope"></i> support@swiftlogistics.com</p>
+        <p><i class="fas fa-phone"></i> +234 800 123 4567</p>
+        <p><i class="fas fa-map-marker-alt"></i> 12 Admiralty Way, Lekki, Lagos, Nigeria</p>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h3><i class="fas fa-shipping-fast"></i> SwiftLogistics</h3><p>Your trusted partner for flights, rides, car rentals and worldwide shipping.</p></div>
+      <div><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Account</h4><ul><li><a href="login.html">Customer Login</a></li><li><a href="register.html">Register</a></li><li><a href="../admin/login.html">Admin Login</a></li></ul></div>
+      <div><h4>Contact</h4><p><i class="fas fa-envelope"></i> support@swiftlogistics.com</p><p><i class="fas fa-phone"></i> +234 800 123 4567</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 SwiftLogistics. All rights reserved.</p></div>
+  </footer>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('contactSuccess').style.display = 'block';
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
