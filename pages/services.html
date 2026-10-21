@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shipping-fast"></i> Swift<span>Logistics</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="authLinks"><a href="login.html" class="btn btn-outline">Login</a> <a href="register.html" class="btn btn-primary">Register</a></li>
+        <li id="userMenu" style="display:none;"><span class="user-greeting"></span> <a href="dashboard.html" class="btn btn-outline">My Bookings</a> <button onclick="logout()" class="btn btn-danger">Logout</button></li>
+      </ul>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <section class="section">
+    <div class="container">
+      <div class="section-header"><h2>Book a Service</h2><p>You must be logged in. Payment is required before approval.</p></div>
+      <div id="loginRequired" class="alert alert-warning" style="display:none;max-width:700px;margin:0 auto 2rem;"><strong>Login required.</strong> Please <a href="login.html">log in</a> or <a href="register.html">register</a>.</div>
+      <div class="booking-tabs">
+        <button class="booking-tab active" data-target="flights"><i class="fas fa-plane"></i> Flights</button>
+        <button class="booking-tab" data-target="rides"><i class="fas fa-car"></i> Rides</button>
+        <button class="booking-tab" data-target="cars"><i class="fas fa-key"></i> Car Rental</button>
+        <button class="booking-tab" data-target="shipment"><i class="fas fa-box"></i> Goods Shipment</button>
+      </div>
+      <div id="flights" class="booking-panel active">
+        <form class="booking-form" id="flightForm">
+          <h3 style="margin-bottom:1.5rem;"><i class="fas fa-plane"></i> Book a Flight</h3>
+          <div class="form-row"><div class="form-group"><label>From</label><input type="text" name="from" required /></div><div class="form-group"><label>To</label><input type="text" name="to" required /></div></div>
+          <div class="form-row"><div class="form-group"><label>Departure</label><input type="date" name="departDate" required /></div><div class="form-group"><label>Return</label><input type="date" name="returnDate" /></div></div>
+          <div class="form-row"><div class="form-group"><label>Passengers</label><input type="number" name="passengers" min="1" max="9" value="1" required /></div><div class="form-group"><label>Class</label><select name="class"><option value="economy">Economy</option><option value="business">Business</option><option value="first">First</option></select></div></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Book Flight</button>
+        </form>
+      </div>
+      <div id="rides" class="booking-panel">
+        <form class="booking-form" id="rideForm">
+          <h3 style="margin-bottom:1.5rem;"><i class="fas fa-car"></i> Book a Ride</h3>
+          <div class="form-group"><label>Pickup</label><input type="text" name="pickup" required /></div>
+          <div class="form-group"><label>Drop-off</label><input type="text" name="dropoff" required /></div>
+          <div class="form-row"><div class="form-group"><label>Date & Time</label><input type="datetime-local" name="datetime" required /></div><div class="form-group"><label>Vehicle</label><select name="vehicleType"><option value="standard">Standard</option><option value="premium">Premium</option><option value="suv">SUV</option><option value="van">Van</option></select></div></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Book Ride</button>
+        </form>
+      </div>
+      <div id="cars" class="booking-panel">
+        <form class="booking-form" id="carForm">
+          <h3 style="margin-bottom:1.5rem;"><i class="fas fa-key"></i> Rent a Car</h3>
+          <div class="form-row"><div class="form-group"><label>City</label><input type="text" name="city" required /></div><div class="form-group"><label>Category</label><select name="category"><option value="economy">Economy</option><option value="sedan">Sedan</option><option value="suv">SUV</option><option value="luxury">Luxury</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label>Pickup Date</label><input type="date" name="pickupDate" required /></div><div class="form-group"><label>Return Date</label><input type="date" name="returnDate" required /></div></div>
+          <div class="form-group"><label>Chauffeur?</label><select name="chauffeur"><option value="no">Self-drive</option><option value="yes">With chauffeur</option></select></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Rent Car</button>
+        </form>
+      </div>
+      <div id="shipment" class="booking-panel">
+        <form class="booking-form" id="shipmentForm">
+          <h3 style="margin-bottom:1.5rem;"><i class="fas fa-box"></i> Goods Shipment</h3>
+          <div class="form-row"><div class="form-group"><label>Origin</label><input type="text" name="origin" required /></div><div class="form-group"><label>Destination</label><input type="text" name="destination" required /></div></div>
+          <div class="form-row"><div class="form-group"><label>Mode</label><select name="mode" required><option value="road">Road</option><option value="air">Air</option><option value="sea">Sea</option></select></div><div class="form-group"><label>Weight (kg)</label><input type="number" name="weight" min="0.1" step="0.1" required /></div></div>
+          <div class="form-group"><label>Description</label><textarea name="description" required></textarea></div>
+          <div class="form-group"><label>Pickup Date</label><input type="date" name="pickupDate" required /></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Request Shipment</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h3><i class="fas fa-shipping-fast"></i> SwiftLogistics</h3><p>Your trusted partner.</p></div>
+      <div><h4>Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="services.html">Services</a></li></ul></div>
+      <div><h4>Account</h4><ul><li><a href="login.html">Login</a></li><li><a href="../admin/login.html">Admin</a></li></ul></div>
+      <div><h4>Contact</h4><p>support@swiftlogistics.com</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 SwiftLogistics</p></div>
+  </footer>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const session = getSession();
+      const loginReq = document.getElementById('loginRequired');
+      if (!session) {
+        loginReq.style.display = 'block';
+        document.querySelectorAll('.booking-form input, .booking-form select, .booking-form textarea, .booking-form button').forEach(el => el.disabled = true);
+      }
+      const prices = {
+        flight: d => ({economy:85000,business:220000,first:450000}[d.class]||85000)*(+d.passengers||1),
+        ride: d => ({standard:5500,premium:12000,suv:15000,van:18000}[d.vehicleType]||5500),
+        car: d => { const days=Math.max(1,Math.ceil((new Date(d.returnDate)-new Date(d.pickupDate))/86400000)); let t=({economy:25000,sedan:40000,suv:60000,luxury:120000}[d.category]||25000)*days; if(d.chauffeur==='yes')t+=15000*days; return t; },
+        shipment: d => Math.round(({road:800,air:3500,sea:450}[d.mode]||800)*(+d.weight||1))
+      };
+      async function handle(type, formId) {
+        document.getElementById(formId).addEventListener('submit', async e => {
+          e.preventDefault();
+          if (!getSession()) { alert('Please log in first.'); return; }
+          const details = Object.fromEntries(new FormData(e.target).entries());
+          const amount = prices[type](details);
+          try {
+            const { booking } = await Api.createBooking({ type, details, amount });
+            showPaymentModal(booking.id, booking.amount, () => { alert('Payment successful!'); window.location.href='dashboard.html'; });
+          } catch (err) {
+            const result = createBooking({ type, ...details, amount });
+            if (result.ok) showPaymentModal(result.booking.id, result.booking.amount, () => { alert('Payment successful!'); window.location.href='dashboard.html'; });
+            else alert(err.message || result.error);
+          }
+        });
+      }
+      handle('flight','flightForm'); handle('ride','rideForm'); handle('car','carForm'); handle('shipment','shipmentForm');
+    });
+  </script>
+</body>
+</html>
