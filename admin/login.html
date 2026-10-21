@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login – SwiftLogistics</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <section class="form-section bg-light" style="min-height:100vh;display:flex;align-items:center;">
+    <div class="form-card">
+      <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+      <p class="subtitle">Separate from customer accounts</p>
+      <div id="errorMsg" class="form-error" style="display:none;text-align:center;margin-bottom:1rem;"></div>
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label>Admin Email</label>
+          <input type="email" name="email" required value="admin@swiftlogistics.com" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" required value="Admin@123" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Login as Admin</button>
+      </form>
+      <p class="form-footer" style="font-size:0.85rem;color:#6b7280;">
+        Demo credentials are pre-filled. Customer login is on the main site.
+      </p>
+      <p class="form-footer"><a href="../index.html">← Back to website</a></p>
+    </div>
+  </section>
+  <script src="../js/auth.js"></script>
+  <script>
+    if (getAdminSession()) window.location.href = 'dashboard.html';
+    document.getElementById('adminLoginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const result = loginAdmin(fd.get('email'), fd.get('password'));
+      if (result.ok) {
+        window.location.href = 'dashboard.html';
+      } else {
+        const err = document.getElementById('errorMsg');
+        err.textContent = result.error;
+        err.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
