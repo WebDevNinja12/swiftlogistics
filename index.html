@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SwiftLogistics – Global Transport & Logistics</title>
+  <title>HAMA LOGISTICS – Global Transport & Shipping</title>
+  <meta name="description" content="Book flights, rides, car rentals and ship goods worldwide with HAMA LOGISTICS." />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -11,100 +12,146 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="logo">
-        <i class="fas fa-shipping-fast"></i> Swift<span>Logistics</span>
+        <i class="fas fa-shipping-fast"></i> HAMA <span>LOGISTICS</span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="pages/about.html">About Us</a></li>
+        <li><a href="pages/about.html">About</a></li>
         <li><a href="pages/services.html">Services</a></li>
         <li><a href="pages/contact.html">Contact</a></li>
-        <li id="authLinks">
-          <a href="pages/login.html" class="btn btn-outline">Login</a>
-          <a href="pages/register.html" class="btn btn-primary">Register</a>
+        <li id="authLinks" style="display:flex;gap:0.5rem;align-items:center;">
+          <a href="pages/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="pages/register.html" class="btn btn-primary btn-sm">Register</a>
         </li>
-        <li id="userMenu" style="display:none;">
+        <li id="userMenu" style="display:none;align-items:center;gap:0.6rem;">
           <span class="user-greeting"></span>
-          <a href="pages/dashboard.html" class="btn btn-outline">My Bookings</a>
-          <button onclick="logout()" class="btn btn-danger">Logout</button>
+          <a href="pages/dashboard.html" class="btn btn-outline btn-sm">My Bookings</a>
+          <button type="button" onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
         </li>
       </ul>
-      <button class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
   <header class="hero">
-    <div class="hero-overlay"></div>
     <div class="container hero-content">
-      <h1>Reliable Logistics.<br>Worldwide Reach.</h1>
-      <p>Book flights, rides, car rentals and ship goods across road, air and sea — all in one place.</p>
+      <h1>Move people &amp; cargo<br>with confidence.</h1>
+      <p>Flights, rides, car rentals and multi-modal shipping — one account, secure payment, fast approval.</p>
       <div class="hero-buttons">
-        <a href="pages/services.html" class="btn btn-primary btn-lg">Book a Service</a>
-        <a href="pages/about.html" class="btn btn-outline-light btn-lg">Learn More</a>
+        <a href="pages/services.html" class="btn btn-primary btn-lg">Book a service</a>
+        <a href="pages/about.html" class="btn btn-outline-light btn-lg">Learn more</a>
       </div>
     </div>
   </header>
-  <section class="section services-preview">
+
+  <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2>Our Services</h2>
-        <p>Everything you need for seamless travel and cargo movement</p>
+        <h2>Our services</h2>
+        <p>Everything you need for travel and freight in one place</p>
       </div>
       <div class="services-grid">
         <div class="service-card">
           <div class="icon"><i class="fas fa-plane"></i></div>
-          <h3>Flight Booking</h3>
-          <p>Search and book domestic & international flights with real-time availability.</p>
-          <a href="pages/services.html#flights" class="btn btn-sm">Book Flight</a>
+          <h3>Flight booking</h3>
+          <p>Domestic and international flights with clear pricing and quick confirmation.</p>
+          <a href="pages/services.html#flights" class="btn btn-sm btn-primary">Book flight</a>
         </div>
         <div class="service-card">
           <div class="icon"><i class="fas fa-car"></i></div>
-          <h3>Ride Booking</h3>
+          <h3>Ride booking</h3>
           <p>Airport transfers, city rides and intercity travel at competitive rates.</p>
-          <a href="pages/services.html#rides" class="btn btn-sm">Book Ride</a>
+          <a href="pages/services.html#rides" class="btn btn-sm btn-primary">Book ride</a>
         </div>
         <div class="service-card">
           <div class="icon"><i class="fas fa-key"></i></div>
-          <h3>Car Rental</h3>
-          <p>Self-drive and chauffeur-driven cars available in major cities.</p>
-          <a href="pages/services.html#cars" class="btn btn-sm">Rent Car</a>
+          <h3>Car rental</h3>
+          <p>Self-drive or chauffeur-driven vehicles in major cities.</p>
+          <a href="pages/services.html#cars" class="btn btn-sm btn-primary">Rent car</a>
         </div>
         <div class="service-card">
           <div class="icon"><i class="fas fa-box"></i></div>
-          <h3>Goods Shipment</h3>
-          <p>Ship packages and cargo by road, air or sea with full tracking.</p>
-          <a href="pages/services.html#shipment" class="btn btn-sm">Ship Goods</a>
+          <h3>Goods shipment</h3>
+          <p>Ship packages by road, air or sea with tracked delivery.</p>
+          <a href="pages/services.html#shipment" class="btn btn-sm btn-primary">Ship goods</a>
         </div>
       </div>
     </div>
   </section>
-  <section class="section why-us bg-light">
+
+  <section class="section bg-light">
     <div class="container">
-      <div class="section-header"><h2>Why Choose SwiftLogistics?</h2></div>
+      <div class="section-header">
+        <h2>Why HAMA LOGISTICS?</h2>
+        <p>Built for reliability and transparency</p>
+      </div>
       <div class="features-grid">
-        <div class="feature"><i class="fas fa-shield-alt"></i><h4>Secure Payments</h4><p>All bookings require payment confirmation before approval.</p></div>
-        <div class="feature"><i class="fas fa-clock"></i><h4>24/7 Support</h4><p>Our team is available around the clock for your needs.</p></div>
-        <div class="feature"><i class="fas fa-globe-africa"></i><h4>Global Network</h4><p>Partners in over 80 countries for seamless logistics.</p></div>
-        <div class="feature"><i class="fas fa-user-check"></i><h4>Verified Accounts</h4><p>Only logged-in customers can make bookings.</p></div>
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Secure payments</h4>
+          <p>Payment is required before any booking is approved.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-clock"></i>
+          <h4>Fast support</h4>
+          <p>Operations team reviews paid bookings promptly.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-globe-africa"></i>
+          <h4>Wide network</h4>
+          <p>Partners across regions for seamless logistics.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-user-check"></i>
+          <h4>Verified accounts</h4>
+          <p>Only logged-in customers can place bookings.</p>
+        </div>
       </div>
     </div>
   </section>
+
   <section class="section cta">
     <div class="container text-center">
       <h2>Ready to move?</h2>
-      <p>Create an account and start booking in minutes.</p>
-      <a href="pages/register.html" class="btn btn-primary btn-lg">Get Started Free</a>
+      <p>Create a free account and start booking in minutes.</p>
+      <a href="pages/register.html" class="btn btn-primary btn-lg">Get started</a>
     </div>
   </section>
+
   <footer class="footer">
     <div class="container footer-grid">
-      <div><h3><i class="fas fa-shipping-fast"></i> SwiftLogistics</h3><p>Your trusted partner for flights, rides, car rentals and worldwide shipping.</p></div>
-      <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="pages/about.html">About</a></li><li><a href="pages/services.html">Services</a></li><li><a href="pages/contact.html">Contact</a></li></ul></div>
-      <div><h4>Account</h4><ul><li><a href="pages/login.html">Customer Login</a></li><li><a href="pages/register.html">Register</a></li><li><a href="admin/login.html">Admin Login</a></li></ul></div>
-      <div><h4>Contact</h4><p><i class="fas fa-envelope"></i> support@swiftlogistics.com</p><p><i class="fas fa-phone"></i> +234 800 123 4567</p></div>
+      <div>
+        <h3><i class="fas fa-shipping-fast"></i> HAMA <span>LOGISTICS</span></h3>
+        <p>Flights, rides, car rentals and worldwide shipping.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/services.html">Services</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="pages/login.html">Customer login</a></li>
+          <li><a href="pages/register.html">Register</a></li>
+          <li><a href="admin/login.html">Admin login</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><i class="fas fa-envelope"></i> support@hamalogistics.com</p>
+        <p><i class="fas fa-phone"></i> +234 800 123 4567</p>
+      </div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 SwiftLogistics. All rights reserved.</p></div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HAMA LOGISTICS. All rights reserved.</p>
+    </div>
   </footer>
+
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
 </body>
