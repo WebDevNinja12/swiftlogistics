@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HAMA LOGISTICS – Global Transport & Shipping</title>
-  <meta name="description" content="Book flights, rides, car rentals and ship goods worldwide with HAMA LOGISTICS." />
+  <meta name="description" content="Book flights, rides, car rentals and ship goods with HAMA LOGISTICS." />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -12,18 +12,18 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="logo">
-        <i class="fas fa-shipping-fast"></i> HAMA <span>LOGISTICS</span>
+        <span class="logo-mark"><i class="fas fa-shipping-fast"></i></span>
+        HAMA <span>LOGISTICS</span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="pages/about.html">About</a></li>
         <li><a href="pages/services.html">Services</a></li>
         <li><a href="pages/contact.html">Contact</a></li>
-        <li id="authLinks" style="display:flex;gap:0.5rem;align-items:center;">
-          <a href="pages/login.html" class="btn btn-outline btn-sm">Login</a>
-          <a href="pages/register.html" class="btn btn-primary btn-sm">Register</a>
+        <li id="authLinks" style="display:flex;gap:0.5rem;align-items:center;margin-left:0.5rem;">
+          <a href="pages/login.html" class="btn btn-primary btn-sm"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
-        <li id="userMenu" style="display:none;align-items:center;gap:0.6rem;">
+        <li id="userMenu" style="display:none;align-items:center;gap:0.5rem;margin-left:0.5rem;">
           <span class="user-greeting"></span>
           <a href="pages/dashboard.html" class="btn btn-outline btn-sm">My Bookings</a>
           <button type="button" onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
@@ -35,14 +35,36 @@
 
   <header class="hero">
     <div class="container hero-content">
-      <h1>Move people &amp; cargo<br>with confidence.</h1>
-      <p>Flights, rides, car rentals and multi-modal shipping — one account, secure payment, fast approval.</p>
+      <div class="hero-badge"><i class="fas fa-truck"></i> HAMA LOGISTICS</div>
+      <h1>Move smarter.<br><span class="accent">Ship everything.</span></h1>
+      <p>Flights, rides, car rentals and multi-modal freight — book, pay and track from one secure platform.</p>
       <div class="hero-buttons">
-        <a href="pages/services.html" class="btn btn-primary btn-lg">Book a service</a>
-        <a href="pages/about.html" class="btn btn-outline-light btn-lg">Learn more</a>
+        <a href="pages/services.html" class="btn btn-accent btn-lg">Book a service <i class="fas fa-arrow-right"></i></a>
+        <a href="pages/about.html" class="btn btn-outline-light btn-lg">Explore more</a>
       </div>
     </div>
   </header>
+
+  <div class="trust-strip">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <div class="icon-wrap"><i class="fas fa-shield-alt"></i></div>
+        <div><h4>Secure payments</h4><p>Pay before approval for full transparency</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="icon-wrap"><i class="fas fa-check-circle"></i></div>
+        <div><h4>Verified process</h4><p>Admin review on every paid booking</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="icon-wrap"><i class="fas fa-bolt"></i></div>
+        <div><h4>Fast support</h4><p>Operations team ready to assist</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="icon-wrap"><i class="fas fa-map-marker-alt"></i></div>
+        <div><h4>Wide coverage</h4><p>Road, air and sea logistics network</p></div>
+      </div>
+    </div>
+  </div>
 
   <section class="section">
     <div class="container">
@@ -51,30 +73,38 @@
         <p>Everything you need for travel and freight in one place</p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
-          <div class="icon"><i class="fas fa-plane"></i></div>
-          <h3>Flight booking</h3>
-          <p>Domestic and international flights with clear pricing and quick confirmation.</p>
-          <a href="pages/services.html#flights" class="btn btn-sm btn-primary">Book flight</a>
-        </div>
-        <div class="service-card">
-          <div class="icon"><i class="fas fa-car"></i></div>
-          <h3>Ride booking</h3>
-          <p>Airport transfers, city rides and intercity travel at competitive rates.</p>
-          <a href="pages/services.html#rides" class="btn btn-sm btn-primary">Book ride</a>
-        </div>
-        <div class="service-card">
-          <div class="icon"><i class="fas fa-key"></i></div>
-          <h3>Car rental</h3>
-          <p>Self-drive or chauffeur-driven vehicles in major cities.</p>
-          <a href="pages/services.html#cars" class="btn btn-sm btn-primary">Rent car</a>
-        </div>
-        <div class="service-card">
-          <div class="icon"><i class="fas fa-box"></i></div>
-          <h3>Goods shipment</h3>
-          <p>Ship packages by road, air or sea with tracked delivery.</p>
-          <a href="pages/services.html#shipment" class="btn btn-sm btn-primary">Ship goods</a>
-        </div>
+        <article class="service-card">
+          <div class="card-media flight"><i class="fas fa-plane"></i></div>
+          <div class="card-body">
+            <h3>Flight booking</h3>
+            <p>Domestic and international flights with clear pricing and quick confirmation.</p>
+            <a href="pages/services.html#flights" class="btn btn-primary btn-sm">Book flight</a>
+          </div>
+        </article>
+        <article class="service-card">
+          <div class="card-media ride"><i class="fas fa-car"></i></div>
+          <div class="card-body">
+            <h3>Ride booking</h3>
+            <p>Airport transfers, city rides and intercity travel at competitive rates.</p>
+            <a href="pages/services.html#rides" class="btn btn-primary btn-sm">Book ride</a>
+          </div>
+        </article>
+        <article class="service-card">
+          <div class="card-media car"><i class="fas fa-key"></i></div>
+          <div class="card-body">
+            <h3>Car rental</h3>
+            <p>Self-drive or chauffeur-driven vehicles across major cities.</p>
+            <a href="pages/services.html#cars" class="btn btn-primary btn-sm">Rent car</a>
+          </div>
+        </article>
+        <article class="service-card">
+          <div class="card-media ship"><i class="fas fa-box"></i></div>
+          <div class="card-body">
+            <h3>Goods shipment</h3>
+            <p>Ship packages by road, air or sea with reliable handling.</p>
+            <a href="pages/services.html#shipment" class="btn btn-primary btn-sm">Ship goods</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -83,29 +113,13 @@
     <div class="container">
       <div class="section-header">
         <h2>Why HAMA LOGISTICS?</h2>
-        <p>Built for reliability and transparency</p>
+        <p>Built for reliability and transparent operations</p>
       </div>
       <div class="features-grid">
-        <div class="feature">
-          <i class="fas fa-shield-alt"></i>
-          <h4>Secure payments</h4>
-          <p>Payment is required before any booking is approved.</p>
-        </div>
-        <div class="feature">
-          <i class="fas fa-clock"></i>
-          <h4>Fast support</h4>
-          <p>Operations team reviews paid bookings promptly.</p>
-        </div>
-        <div class="feature">
-          <i class="fas fa-globe-africa"></i>
-          <h4>Wide network</h4>
-          <p>Partners across regions for seamless logistics.</p>
-        </div>
-        <div class="feature">
-          <i class="fas fa-user-check"></i>
-          <h4>Verified accounts</h4>
-          <p>Only logged-in customers can place bookings.</p>
-        </div>
+        <div class="feature"><i class="fas fa-lock"></i><h4>Secure accounts</h4><p>Only logged-in customers can place bookings.</p></div>
+        <div class="feature"><i class="fas fa-credit-card"></i><h4>Pay first</h4><p>Payment is required before any booking is approved.</p></div>
+        <div class="feature"><i class="fas fa-user-tie"></i><h4>Admin oversight</h4><p>Paid requests are reviewed by the operations team.</p></div>
+        <div class="feature"><i class="fas fa-globe-africa"></i><h4>Multi-modal</h4><p>One platform for flights, rides, cars and cargo.</p></div>
       </div>
     </div>
   </section>
@@ -114,14 +128,14 @@
     <div class="container text-center">
       <h2>Ready to move?</h2>
       <p>Create a free account and start booking in minutes.</p>
-      <a href="pages/register.html" class="btn btn-primary btn-lg">Get started</a>
+      <a href="pages/register.html" class="btn btn-accent btn-lg">Get started</a>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <h3><i class="fas fa-shipping-fast"></i> HAMA <span>LOGISTICS</span></h3>
+        <h3>HAMA <span>LOGISTICS</span></h3>
         <p>Flights, rides, car rentals and worldwide shipping.</p>
       </div>
       <div>
@@ -143,13 +157,11 @@
       </div>
       <div>
         <h4>Contact</h4>
-        <p><i class="fas fa-envelope"></i> support@hamalogistics.com</p>
-        <p><i class="fas fa-phone"></i> +234 800 123 4567</p>
+        <p>support@hamalogistics.com</p>
+        <p>+234 800 123 4567</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 HAMA LOGISTICS. All rights reserved.</p>
-    </div>
+    <div class="footer-bottom"><p>&copy; 2026 HAMA LOGISTICS. All rights reserved.</p></div>
   </footer>
 
   <script src="js/auth.js"></script>
